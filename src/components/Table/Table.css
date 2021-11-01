@@ -57,3 +57,16 @@
     width: 90%;
     height: 100%;
 }
+
+.Triangle{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 2em;
+    margin-bottom: -.2em;
+    cursor: pointer;
+}
+
+.Rotate{
+    transform: rotate(180deg);
+}

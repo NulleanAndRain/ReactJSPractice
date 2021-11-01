@@ -1,18 +1,39 @@
+import { useCallback, useRef } from 'react';
 import { TableItem } from "./TableItem";
 
 const TableHeader = (props) => {
+    const sortByName = () => {
+        console.log('sortByName');
+    };
+    const sortByPrice = () => {
+        console.log('sortByPrice');
+    };
     return <TableItem 
-        Item1 = {<CtrlCell text = 'Name'/>}
-        Item2 = {<CtrlCell text = 'Price'/>}
+        Item1 = {<CtrlCell text = 'Name' action = {sortByName}/>}
+        Item2 = {<CtrlCell text = 'Price' action = {sortByPrice}/>}
         Item3 = {<>Actions</>}
     />
 }
 
 const CtrlCell = props =>{
+    const btn = useRef();
+    const click = useCallback(
+        (event) => {
+            event.preventDefault();
+            const elem = btn.current;
+            elem.classList.toggle('Rotate');
+            if (!!props.action) props.action(event);
+        }
+    ,[btn, props]);
+
     return (
         <div className = 'HeaderCell'>
             <span className='HeaderCellText'>{props.text}</span>
-            <button onClick = {props.action}> </button>
+            <button 
+                onClick = {click}
+                ref = {btn}
+                className = 'Triangle'
+            >△</button>
         </div>
     );
 }
