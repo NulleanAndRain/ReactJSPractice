@@ -1,16 +1,12 @@
+import { useState } from 'react';
 import { ItemActions } from "./ItemActions";
 import { TableHeader } from "./TableHeader";
 import { TableItem } from "./TableItem";
 
-export function TableContainer(props) {
-    var tableItems = [
-        {name: 'item', price: 200},
-        {name: 'rusty bow', price: 3000},
-        {name: 'fungi', price: 20},
-        {name: 'item', price: 200},
-        {name: 'item', price: 200}
-    ]
+import data from '../../data/items.json'
 
+export function TableContainer(props) {
+    const [tableItems, updateItems] = useState([...data]);
     return (
     <>
         <TableHeader text={props.text}/>
@@ -19,7 +15,7 @@ export function TableContainer(props) {
                 <TableItem
                     key = {id}
                     Item1 = {item.name}
-                    Item2 = {item.price}
+                    Item2 = {'$' + item.price}
                     Item3 = {<ItemActions />}
                 />
             )
