@@ -8,11 +8,17 @@
 
 .TableCell1, .TableCell2, .TableCell3{
     outline: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .TableCell1{
-    width: 40%;
+    width: 45%;
     background-color: rgb(59, 159, 177);
+    justify-content: left;
+    padding-left: 5%;
 }
 
 .TableCell2{
@@ -21,6 +27,7 @@
 }
 
 .TableCell3{
-    width: 40%;
+    width: 30%;
     background-color: rgb(100, 197, 168);
+    justify-content: space-evenly;
 }
