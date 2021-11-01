@@ -1,7 +1,7 @@
-const ItemActions = (props) => 
-    (<>
-        <button className={'ActionButton'}>b1</button>
-        <button className={'ActionButton'}>b2</button>
+const ItemActions = (props) => (
+    <>
+        <button className={'ActionButton'}>Edit</button>
+        <button className={'ActionButton'}>Remove</button>
     </>);
 
 export {ItemActions};

@@ -1,17 +1,14 @@
-import { useState } from 'react';
+import { useMemo } from "react";
 import { ItemActions } from "./ItemActions";
 import { TableHeader } from "./TableHeader";
 import { TableItem } from "./TableItem";
 
-import data from '../../data/items.json'
-
 export function TableContainer(props) {
-    const [tableItems, updateItems] = useState([...data]);
-    return (
+    return useMemo(() =>
     <>
-        <TableHeader text={props.text}/>
+        <TableHeader />
         {
-            tableItems.map((item, id) => 
+            props.itemsList.map((item, id) => 
                 <TableItem
                     key = {id}
                     Item1 = {item.name}
@@ -20,6 +17,5 @@ export function TableContainer(props) {
                 />
             )
         }
-    </>
-    );
+    </>, [props.itemsList]);
 }
