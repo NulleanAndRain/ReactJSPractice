@@ -1,7 +1,7 @@
 const ItemActions = (props) => 
     (<>
-        <button>b1</button>
-        <button>b2</button>
+        <button className={'ActionButton'}>b1</button>
+        <button className={'ActionButton'}>b2</button>
     </>);
 
 export {ItemActions};

@@ -1,0 +1,42 @@
+.Header{
+    height: 6vh;
+    width: 100%;
+    display: flex;
+}
+
+.Search{
+    align-self: left;
+    display: flex;
+    width: 60%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.SearchInput{
+    width: 70%;
+    height: 1.5em;
+    padding-left: 1em;
+}
+.SearchBtn{
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 2em;
+}
+
+.AddBtnHolder{
+    align-self: right;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+    width: 35%;
+}
+
+.AddBtn{
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 2em;
+}
