@@ -4,7 +4,7 @@ import { ItemActions } from "./ItemActions";
 import { TableHeader } from "./TableHeader";
 import { TableItem } from "./TableItem";
 
-export function TableContainer(props) {
+export function TableDefault(props) {
     const itemsList = useSelector(state => state.currentList);
 
     return useMemo(() =>

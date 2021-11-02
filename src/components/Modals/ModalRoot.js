@@ -1,8 +1,8 @@
-import 'Modals.css';
+import './Modals.css';
 
 const ModalRoot = (props) => {
     return (
-    <div>
+    <div className='ModalRoot'>
 
     </div>);
 }
