@@ -8,7 +8,7 @@ import data from './data/items.json'
 
 function App() {
   const reducer = (state, action) => {
-
+    return state;
   };
 
   const store = createStore(reducer, {
