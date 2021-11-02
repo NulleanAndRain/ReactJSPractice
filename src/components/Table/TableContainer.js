@@ -20,5 +20,5 @@ export function TableContainer(props) {
                 />
             )
         }
-    </>, [props.itemsList]);
+    </>, [itemsList]);
 }
