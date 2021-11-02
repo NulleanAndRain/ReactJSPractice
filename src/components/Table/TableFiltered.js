@@ -5,8 +5,9 @@ import { TableDefault } from "./TableDefault";
 
 const TableFiltered = props => {
     let { searchFilter } = useParams();
-    //use dispatcher to filter (?)
+
     const dispatch = useDispatch();
+
     useEffect(
         () => dispatch({type: 'filter', value: searchFilter}),
         [dispatch, searchFilter]
@@ -14,4 +15,5 @@ const TableFiltered = props => {
 
     return <TableDefault/>;
 };
+
 export { TableFiltered }

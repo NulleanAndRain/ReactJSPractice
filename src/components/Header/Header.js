@@ -1,19 +1,29 @@
-import { useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useCallback, useRef } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header (props) {
     let history = useHistory();
+    let location = useLocation();
 
-    const onSubmit = (event) =>{
+    const onSubmit = useCallback((event) =>{
         event.preventDefault();
         let str = inputEl.current.value.trim();
+        let next;
+
+
         if (str.length > 0) {
-            history.push(`/search/${str}`);
+            next = `/search/${str}`;
         } else {
-            history.push('/');
+            next = '/';
         }
-    }
+
+        if (next === location.pathname) return;
+
+        history.push(next);
+        history.goForward();
+    }, [location.pathname, history]);
+
     const inputEl = useRef();
 
     return (
