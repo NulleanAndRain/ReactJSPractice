@@ -12,7 +12,18 @@ import { TableFiltered } from './components/Table/TableFiltered';
 
 function App() {
   const reducer = (state, action) => {
-    return state;
+    switch (action.type) {
+      case 'filter':
+          let filtered = state.allItems.filter(e => e.name.toLower().includes(action.value.toLower()))
+          let newState = {
+            ...state,
+            currentList: filtered
+          }
+          return newState;
+    
+      default:
+        return state;
+    }
   };
 
   const store = createStore(reducer, {
@@ -24,22 +35,22 @@ function App() {
 
   return (
     <Provider store = {store} >
-      <div className="App">
-        <div className="App-content">
-          <Header text='header'/>
-          <Router history={history}>
-            <Switch>
-              <Route location='/'>
-                <TableDefault />
-              </Route>
-              <Route location='/search/:searchFilter'>
-                <TableFiltered/>
-              </Route>
-            </Switch>
-          </Router>
+      <Router history={history}>
+        <div className="App">
+          <div className="App-content">
+            <Header text='header'/>
+              <Switch>
+                <Route path='/search/:searchFilter'>
+                  <TableFiltered />
+                </Route>
+                <Route path='/'>
+                  <TableDefault />
+                </Route>
+              </Switch>
+          </div>
         </div>
-      </div>
-      {/* <ModalRoot/> */}
+        {/* <ModalRoot/> */}
+      </Router>
     </Provider>
   );
 }

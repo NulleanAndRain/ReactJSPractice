@@ -1,7 +1,20 @@
+import { useCallback, useEffect, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 import { TableDefault } from "./TableDefault";
 
 const TableFiltered = props => {
+    let { searchFilter } = useParams();
     //use dispatcher to filter (?)
-    return <TableDefault/>
+    const dispatch = useDispatch();
+    useEffect(
+        () => dispatch({type: 'filter', value: searchFilter}),
+        [dispatch, searchFilter]
+    );
+
+    return useMemo(
+    <>
+        <TableDefault/>
+    </>, [searchFilter]);
 };
 export { TableFiltered }
