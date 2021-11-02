@@ -14,7 +14,7 @@ function App() {
   const reducer = (state, action) => {
     switch (action.type) {
       case 'filter':
-          let filtered = state.allItems.filter(e => e.name.toLower().includes(action.value.toLower()))
+          let filtered = state.allItems.filter(e => e.name.toLowerCase().includes(action.value.toLowerCase()))
           let newState = {
             ...state,
             currentList: filtered

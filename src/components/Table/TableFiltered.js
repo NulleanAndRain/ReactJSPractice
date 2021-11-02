@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { TableDefault } from "./TableDefault";
@@ -12,9 +12,6 @@ const TableFiltered = props => {
         [dispatch, searchFilter]
     );
 
-    return useMemo(
-    <>
-        <TableDefault/>
-    </>, [searchFilter]);
+    return <TableDefault/>;
 };
 export { TableFiltered }
