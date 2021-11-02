@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import './Header.css';
 
@@ -11,7 +11,6 @@ function Header (props) {
         let str = inputEl.current.value.trim();
         let next;
 
-
         if (str.length > 0) {
             next = `/search/${str}`;
         } else {
@@ -23,6 +22,14 @@ function Header (props) {
         history.push(next);
         history.goForward();
     }, [location.pathname, history]);
+
+    useEffect(() => {
+        if (location.pathname.startsWith('/search/')){
+            inputEl.current.value = location.pathname.replace('/search/', '');
+        } else if (location.pathname === '/') {
+            inputEl.current.value = '';
+        }
+    }, [location]);
 
     const inputEl = useRef();
 
