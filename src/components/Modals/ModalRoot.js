@@ -1,18 +1,21 @@
-import { createContext, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import './Modals.css';
 
-export const ModalsContext = createContext({ root: null, visible: false, setVisible: () => {}});
-
 const ModalRoot = (props) => {
-    const rootRef = useRef();
-    const [visible, setVisible] = useState();
-
-    return (
-    <ModalsContext.Provider value = { {root: rootRef, visible, setVisible} }> 
-        {visible &&
-        <div className='ModalRoot' ref = {rootRef}/>
-        }
-    </ModalsContext.Provider>);
+    return useMemo(() =>
+    <>{props.visible &&
+        <div 
+            className='ModalRoot' 
+            onClick = {() => props.setVisible(false)}
+        >
+            <div 
+                className = 'ModalWrapper' 
+                onClick = {e => e.stopPropagation()}
+                ref = {props.rootRef}
+            />
+        </div>
+    }</>,
+    [props]);
 }
 
 export { ModalRoot };

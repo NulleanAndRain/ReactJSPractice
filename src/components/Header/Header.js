@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { ModalsContext } from '../../App';
 import './Header.css';
 
 function Header (props) {
-    let history = useHistory();
-    let location = useLocation();
+    const history = useHistory();
+    const location = useLocation();
+    const modalsContext = useContext(ModalsContext);
 
     const onSubmit = useCallback((event) =>{
         event.preventDefault();
@@ -31,6 +33,11 @@ function Header (props) {
         }
     }, [location]);
 
+    const AddNew = useCallback((event) => {
+        event.preventDefault();
+        modalsContext.setVisible(true);
+    }, [modalsContext]);
+
     const inputEl = useRef();
 
     return (
@@ -49,7 +56,7 @@ function Header (props) {
                 />
             </form>
             <div className='AddBtnHolder'>
-                <button className='AddBtn'>
+                <button className='AddBtn' onClick = {AddNew}>
                     Add New
                 </button>
             </div>

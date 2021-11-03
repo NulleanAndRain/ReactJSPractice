@@ -8,8 +8,11 @@ import { createBrowserHistory } from 'history';
 import data from './data/items.json'
 import { TableFiltered } from './components/Table/TableFiltered';
 import { TableUnfiltered } from './components/Table/TableUnfiltered';
-// import { ModalRoot } from './components/Modals/ModalRoot';
+import { ModalRoot } from './components/Modals/ModalRoot';
+import { createContext, useRef, useState } from 'react';
 
+
+export const ModalsContext = createContext({ root: null, visible: false, setVisible: () => {console.log('ъеъ')}});
 
 function App() {
   const reducer = (state, action) => {
@@ -70,24 +73,33 @@ function App() {
   });
 
   const history = createBrowserHistory();
+  const rootRef = useRef();
+  const [visible, setVisible] = useState(false);
+
 
   return (
     <Provider store = {store} >
       <Router history={history}>
-        <div className="App">
-          <div className="App-content">
-            <Header text='header'/>
-              <Switch>
-                <Route path='/search/:searchFilter'>
-                  <TableFiltered />
-                </Route>
-                <Route path='/'>
-                  <TableUnfiltered />
-                </Route>
-              </Switch>
+        <ModalsContext.Provider value = { {root: rootRef, visible, setVisible} }> 
+          <div className="App">
+            <div className="App-content">
+              <Header text='header'/>
+                <Switch>
+                  <Route path='/search/:searchFilter'>
+                    <TableFiltered />
+                  </Route>
+                  <Route path='/'>
+                    <TableUnfiltered />
+                  </Route>
+                </Switch>
+            </div>
           </div>
-        </div>
-        {/* <ModalRoot/> */}
+          <ModalRoot 
+            visible = { visible }
+            setVisible = { setVisible }
+            rootRef={ rootRef }
+          />
+        </ModalsContext.Provider>
       </Router>
     </Provider>
   );
