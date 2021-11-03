@@ -17,9 +17,9 @@ const ItemActions = (props) => {
     }, [modalsContext])
 
     const remove = useCallback(() => { 
-        const modal = <RemoveConfirm onSubmit = {submitDelete} onCancel = {cancelDelete}/>
+        const modal = () => <RemoveConfirm onSubmit = {submitDelete} onCancel = {cancelDelete}/>
+        modalsContext.setModals(state => { return {...state, modal}; });
         modalsContext.setVisible(true);
-        modalsContext.root.current.appendChild(modal);
     }, [modalsContext, submitDelete, cancelDelete])
 
     return (

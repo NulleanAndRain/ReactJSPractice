@@ -1,15 +1,12 @@
-import { /*useEffect,*/ useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import './Modals.css';
 
 const ModalRoot =  (props) => {
-    // useEffect(() => {
-    //     if (!!props.rootRef.current) {
-    //         if (!props.visible) {
-    //             props.rootRef.current.children = [];
-    //             console.log('ъоъ');
-    //         }
-    //     } else console.log('ъеъ');
-    // }, [props]);
+    useEffect(() => {
+        if (!props.visible) {
+            props.setModals({});
+        }
+    }, [props]);
 
     return useMemo(() =>
     <>{props.visible &&
@@ -21,11 +18,11 @@ const ModalRoot =  (props) => {
                 className = 'ModalWrapper' 
                 onClick = {e => e.stopPropagation()}
             >
-                {props.children}
+                {props.modals}
             </div>
         </div>
     }</>,
     [props]);
-};
+}
 
 export { ModalRoot };

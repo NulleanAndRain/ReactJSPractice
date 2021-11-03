@@ -22,3 +22,9 @@
     height: auto;
     display: flex;
 }
+
+.DeleteModal{
+    width: 200px;
+    height: 150px;
+    
+}
