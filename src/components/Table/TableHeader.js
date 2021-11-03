@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { TableItem } from "./TableItem";
+import { TableRow } from './TableRow';
 
 const TableHeader = (props) => {
     const sortByName = () => {
@@ -8,7 +8,7 @@ const TableHeader = (props) => {
     const sortByPrice = () => {
         console.log('sortByPrice');
     };
-    return <TableItem 
+    return <TableRow 
         Item1 = {<CtrlCell text = 'Name' action = {sortByName}/>}
         Item2 = {<CtrlCell text = 'Price' action = {sortByPrice}/>}
         Item3 = {<>Actions</>}

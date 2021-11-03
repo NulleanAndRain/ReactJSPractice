@@ -1,10 +1,13 @@
+import { ItemActions } from './ItemActions';
+import { TableRow } from './TableRow';
 import './Table.css';
+import { NameCell } from './NameCell';
 
 export function TableItem(props) {
     return (
-    <div className = 'TableItem'>
-        <span className = 'TableCell1'>{props.Item1}</span>
-        <span className = 'TableCell2'>{props.Item2}</span>
-        <span className = 'TableCell3'>{props.Item3}</span>
-    </div>);
+    <TableRow 
+        Item1 = {<NameCell name = {props.name} count = {props.count} />}
+        Item2 = {'$' + props.price}
+        Item3 = {<ItemActions />}
+    />);
 }

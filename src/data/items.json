@@ -1,7 +1,7 @@
 [
-    {"name": "item", "price": 200},
-    {"name": "rusty bow", "price": 3000},
-    {"name": "fungi", "price": 20},
-    {"name": "apples", "price": 1.5},
-    {"name": "pears", "price": 2}
+    {"name": "item", "price": 200, "count": 100},
+    {"name": "rusty bow", "price": 3000, "count": 1},
+    {"name": "fungus", "price": 2, "count": 20},
+    {"name": "apple", "price": 0.15, "count": 1200},
+    {"name": "pear", "price": 0.2, "count": 10}
 ]
