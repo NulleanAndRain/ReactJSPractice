@@ -1,13 +1,18 @@
 import { useCallback, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { TableRow } from './TableRow';
 
 const TableHeader = (props) => {
-    const sortByName = () => {
-        console.log('sortByName');
-    };
-    const sortByPrice = () => {
-        console.log('sortByPrice');
-    };
+    let dispatch = useDispatch();
+
+    const sortByName = useCallback((dir) => {
+        dispatch({type: 'order_by', column: 'name', dir});
+    }, [dispatch]);
+
+    const sortByPrice = useCallback((dir) => {
+        dispatch({type: 'order_by', column: 'price', dir});
+    }, [dispatch]);
+
     return <TableRow 
         Item1 = {<CtrlCell text = 'Name' action = {sortByName}/>}
         Item2 = {<CtrlCell text = 'Price' action = {sortByPrice}/>}
@@ -22,7 +27,15 @@ const CtrlCell = props =>{
             event.preventDefault();
             const elem = btn.current;
             elem.classList.toggle('Rotate');
-            if (!!props.action) props.action(event);
+
+            let dir;
+            if (btn.current.classList.contains('Rotate')){
+                dir = 'desc';
+            } else {
+                dir = 'asc';
+            }
+
+            if (!!props.action) props.action(dir);
         }
     ,[btn, props]);
 

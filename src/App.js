@@ -14,20 +14,49 @@ function App() {
   const reducer = (state, action) => {
     switch (action.type) {
       case 'filter': {
-          let filtered = state.allItems.filter(e => e.name.toLowerCase().includes(action.value.toLowerCase()))
-          let newState = {
-            ...state,
-            currentList: filtered
-          }
-          return newState;
+        let filtered = state.allItems.filter(e => e.name.toLowerCase().includes(action.value.toLowerCase()))
+        let newState = {
+          ...state,
+          currentList: filtered
         }
-        case 'restore_filter': {
-          let newState = {
-            ...state,
-            currentList: state.allItems
-          }
-          return newState;
+        return newState;
+      }
+
+      case 'restore_filter': {
+        let newState = {
+          ...state,
+          currentList: state.allItems
         }
+        return newState;
+      }
+
+      case 'order_by': {
+        let dir = 0;
+        let ordered = [...state.allItems];
+
+        if (action.dir === 'asc') {
+          dir = 1;
+        } else if (action.dir === 'desc'){
+          dir = -1;
+        }
+
+        if (action.column === 'name') {
+          ordered = ordered.sort((a, b) => {
+            return dir * a.name.localeCompare(b.name);
+          });
+        } else if(action.column === 'price'){
+          ordered = ordered.sort((a, b) => {
+            return (a.price - b.price) * dir;
+          });
+        }
+
+        let newState = {
+          ...state,
+          currentList: ordered
+        }
+        return newState;
+      }
+
       default:
         return state;
     }
