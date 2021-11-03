@@ -1,28 +1,30 @@
-import { /*useEffect,*/ useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
+import { ModalsContext } from '../../App';
 import './Modals.css';
 
 const ModalRoot =  (props) => {
-    // useEffect(() => {
-    //     if (!props.visible) {
-    //         props.setModals({});
-    //     }
-    // }, [props]);
+    const modalsContext = useContext(ModalsContext);
+
+    const bgClick = useCallback(e => {
+        e.stopPropagation();
+        modalsContext.closeModals();
+    }, [modalsContext]);
 
     return useMemo(() =>
-    <>{props.visible &&
+    <>{modalsContext.visible &&
         <div 
             className='ModalRoot' 
-            onClick = {() => props.setVisible(false)}
+            onClick = { bgClick }
         >
             <div 
                 className = 'ModalWrapper' 
                 onClick = {e => e.stopPropagation()}
             >
-                {!!props.modals? props.modals : null}
+                {!!modalsContext.modals? modalsContext.modals : null}
             </div>
         </div>
     }</>,
-    [props]);
+    [modalsContext, bgClick]);
 }
 
 export { ModalRoot };

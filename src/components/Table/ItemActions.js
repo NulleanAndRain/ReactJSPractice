@@ -13,11 +13,11 @@ const ItemActions = (props) => {
     }, [props, dispatch]);
 
     const cancelDelete = useCallback(() => {
-        modalsContext.setVisible(false);
+        modalsContext.closeModals();
     }, [modalsContext])
 
     const remove = useCallback(() => { 
-        const modal = <RemoveConfirm onSubmit = {submitDelete} onCancel = {cancelDelete}/>
+        const modal = <RemoveConfirm onSubmit = {submitDelete} onCancel = {cancelDelete} key = {modalsContext.modals.length}/>
         modalsContext.setModals(state => [...state, modal]);
         modalsContext.setVisible(true);
     }, [modalsContext, submitDelete, cancelDelete])
