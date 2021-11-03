@@ -84,14 +84,14 @@ function App() {
   });
 
   const history = createBrowserHistory();
-  const rootRef = useRef();
+  const root = useRef();
   const [visible, setVisible] = useState(false);
 
 
   return (
     <Provider store = {store} >
       <Router history={history}>
-        <ModalsContext.Provider value = { {root: rootRef, visible, setVisible} }> 
+        <ModalsContext.Provider value = { {root, visible, setVisible} }> 
           <div className="App">
             <div className="App-content">
               <Header text='header'/>
@@ -108,8 +108,9 @@ function App() {
           <ModalRoot 
             visible = { visible }
             setVisible = { setVisible }
-            ref = { rootRef }
-          />
+          >
+            <div ref ={ root }/>
+          </ModalRoot>
         </ModalsContext.Provider>
       </Router>
     </Provider>

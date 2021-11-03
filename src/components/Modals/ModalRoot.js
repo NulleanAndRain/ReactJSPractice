@@ -1,7 +1,7 @@
-import { /*useEffect,*/ forwardRef, useMemo } from 'react';
+import { /*useEffect,*/ useMemo } from 'react';
 import './Modals.css';
 
-const ModalRoot =  forwardRef((props, ref) => {
+const ModalRoot =  (props) => {
     // useEffect(() => {
     //     if (!!props.rootRef.current) {
     //         if (!props.visible) {
@@ -20,13 +20,12 @@ const ModalRoot =  forwardRef((props, ref) => {
             <div 
                 className = 'ModalWrapper' 
                 onClick = {e => e.stopPropagation()}
-                ref = {ref}
             >
                 {props.children}
             </div>
         </div>
     }</>,
-    [props, ref]);
-});
+    [props]);
+};
 
 export { ModalRoot };
