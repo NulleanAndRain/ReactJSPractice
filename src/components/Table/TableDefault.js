@@ -10,12 +10,10 @@ export function TableDefault(props) {
     <>
         <TableHeader />
         {
-            itemsList.map((item, id) => 
+            itemsList.map((item) => 
                 <TableItem
-                    key = {id}
-                    name = {item.name}
-                    price = {item.price}
-                    count = {item.count}
+                    key = {item.id}
+                    item = {item}
                 />
             )
         }

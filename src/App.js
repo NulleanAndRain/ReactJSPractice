@@ -10,6 +10,7 @@ import { TableFiltered } from './components/Table/TableFiltered';
 import { TableUnfiltered } from './components/Table/TableUnfiltered';
 // import { ModalRoot } from './components/Modals/ModalRoot';
 
+
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -62,9 +63,10 @@ function App() {
     }
   };
 
+  const data1 = [...data].map((e, id) => {e.id = id; return e});
   const store = createStore(reducer, {
-    allItems: [...data],
-    currentList: [...data]
+    allItems: [...data1],
+    currentList: [...data1]
   });
 
   const history = createBrowserHistory();
