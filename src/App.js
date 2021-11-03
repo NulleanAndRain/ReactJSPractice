@@ -9,10 +9,14 @@ import data from './data/items.json'
 import { TableFiltered } from './components/Table/TableFiltered';
 import { TableUnfiltered } from './components/Table/TableUnfiltered';
 import { ModalRoot } from './components/Modals/ModalRoot';
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 
-export const ModalsContext = createContext({ root: null, visible: false, setVisible: () => {console.log('ъеъ')}});
+export const ModalsContext = createContext({ 
+  visible: false, 
+  setVisible: () => {console.log('ъеъ')}, 
+  setModals: () => {console.log('ъyъ')}, 
+});
 
 function App() {
   const reducer = (state, action) => {
@@ -86,12 +90,20 @@ function App() {
   const history = createBrowserHistory();
   const [visible, setVisible] = useState(false);
 
-  const [modals, setModals] = useState({});
+  const [modals, setModals] = useState([]);
+
+  const modalsRoot = useMemo(() => 
+    <ModalRoot 
+      visible = { visible }
+      setVisible = { setVisible }
+      modals = {modals}
+      setModals = { setModals }
+  />, [visible, setVisible, modals, setModals]); 
 
   return (
     <Provider store = {store} >
       <Router history={history}>
-        <ModalsContext.Provider value = { {setModals, visible, setVisible} }> 
+        <ModalsContext.Provider value = { {visible, setVisible, setModals} }> 
           <div className="App">
             <div className="App-content">
               <Header text='header'/>
@@ -105,12 +117,7 @@ function App() {
                 </Switch>
             </div>
 
-            <ModalRoot 
-              visible = { visible }
-              setVisible = { setVisible }
-              modals = {modals}
-              setModals = { setModals }
-            />
+            { modalsRoot }
           </div>
         </ModalsContext.Provider>
       </Router>
