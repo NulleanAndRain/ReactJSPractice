@@ -61,6 +61,17 @@ function App() {
         return newState;
       }
 
+      case 'remove_item':{
+        let newList = [...state.allItems].remove(action.value);
+        let newListCurrent = [...state.currentList].remove(action.value);
+        let newState = {
+          ...state,
+          allItems: newList,
+          currentList: newListCurrent
+        }
+        return newState;
+      }
+
       default:
         return state;
     }
@@ -97,7 +108,7 @@ function App() {
           <ModalRoot 
             visible = { visible }
             setVisible = { setVisible }
-            rootRef={ rootRef }
+            ref = { rootRef }
           />
         </ModalsContext.Provider>
       </Router>
