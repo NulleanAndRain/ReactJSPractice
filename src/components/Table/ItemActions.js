@@ -10,7 +10,8 @@ const ItemActions = (props) => {
 
     const submitDelete = useCallback(() => {
         dispatch({type: 'remove_item', value: props.item})
-    }, [props, dispatch]);
+        modalsContext.closeModals();
+    }, [props, dispatch, modalsContext]);
 
     const cancelDelete = useCallback(() => {
         modalsContext.closeModals();

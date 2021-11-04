@@ -67,13 +67,20 @@ function App() {
       }
 
       case 'remove_item':{
-        let newList = [...state.allItems].remove(action.value);
-        let newListCurrent = [...state.currentList].remove(action.value);
+        let newList = [...state.allItems];
+        newList.splice(newList.indexOf(action.value), 1);
+        let newListCurrent = [...state.currentList];
+        newListCurrent.splice(newListCurrent.indexOf(action.value), 1);
+
+        console.log('new list: ', newList);
+        console.log('ordered list: ', newListCurrent);
+
         let newState = {
           ...state,
           allItems: newList,
           currentList: newListCurrent
         }
+        console.log('state: ', newState);
         return newState;
       }
 
