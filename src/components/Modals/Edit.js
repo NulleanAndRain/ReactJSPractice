@@ -5,7 +5,13 @@ const Edit = (props) => {
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
-    }, []);
+        const item = {
+            name: nameInput.current.value,
+            count: countInput.current.value,
+            price: priceInput.current.value
+        }
+        props.onSubmit(item);
+    }, [props]);
 
     const nameInput = useRef();
     const countInput = useRef();

@@ -52,16 +52,19 @@ const reducer = (state, action) => {
       return newState;
     }
 
-    // case 'update_item':{
+    case 'update_item':{
+      const newList = [...state.allItems];
+      const index = newList.indexOf(action.oldItem);
+      newList[index] = action.newItem;
 
+      console.log(index);
 
-    //   let newState = {
-    //     ...state,
-    //     allItems: newList,
-    //     currentList: newListCurrent
-    //   }
-    //   return newState;
-    // }
+      let newState = {
+        ...state,
+        allItems: newList,
+      }
+      return newState;
+    }
 
     default:
       return state;

@@ -16,7 +16,13 @@ const ItemActions = (props) => {
 
     const cancel = useCallback(() => {
         modalsContext.closeModals();
-    }, [modalsContext])
+    }, [modalsContext]);
+
+    const submitEdit = useCallback((newItem) => {
+        newItem.id = props.item.id;
+        dispatch({type: 'update_item', oldItem: props.item, newItem});
+        modalsContext.closeModals();
+    }, [dispatch, props, modalsContext]);
 
     const remove = useCallback(() => { 
         const modal = (
@@ -35,10 +41,11 @@ const ItemActions = (props) => {
         <Edit 
             item={props.item}
             onCancel = {cancel}
+            onSubmit = {submitEdit}
         />);
         modalsContext.setModals(state => [...state, modal]);
         modalsContext.setVisible(true);
-    }, [props, cancel, modalsContext]);
+    }, [props, cancel, modalsContext, submitEdit]);
 
     return (
     <>
