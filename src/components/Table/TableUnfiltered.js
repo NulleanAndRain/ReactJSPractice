@@ -1,18 +1,11 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
 import { TableDefault } from "./TableDefault";
 
 
 const TableUnfiltered = (props) => {
-    let dispatch = useDispatch();
-    let location = useLocation();
-    useEffect(
-        () => dispatch({ type: 'restore_filter' }),
-        [dispatch, location]
-    );
+    const items = useSelector(state => state.allItems);
 
-    return <TableDefault/>
+    return <TableDefault items = {items} />
 }
 
 export { TableUnfiltered };

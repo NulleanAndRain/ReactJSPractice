@@ -21,14 +21,14 @@ export const ModalsContext = createContext({
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'filter': {
-      let filtered = state.allItems.filter(e => e.name.toLowerCase().includes(action.value.toLowerCase()))
-      let newState = {
-        ...state,
-        currentList: filtered
-      }
-      return newState;
-    }
+    // case 'filter': {
+    //   let filtered = state.allItems.filter(e => e.name.toLowerCase().includes(action.value.toLowerCase()))
+    //   let newState = {
+    //     ...state,
+    //     currentList: filtered
+    //   }
+    //   return newState;
+    // }
 
     case 'restore_filter': {
       let newState = {
@@ -68,20 +68,27 @@ const reducer = (state, action) => {
     case 'remove_item':{
       let newList = [...state.allItems];
       newList.splice(newList.indexOf(action.value), 1);
-      let newListCurrent = [...state.currentList];
-      newListCurrent.splice(newListCurrent.indexOf(action.value), 1);
 
       console.log('new list: ', newList);
-      console.log('ordered list: ', newListCurrent);
 
       let newState = {
         ...state,
         allItems: newList,
-        currentList: newListCurrent
       }
       console.log('state: ', newState);
       return newState;
     }
+
+    // case 'update_item':{
+
+
+    //   let newState = {
+    //     ...state,
+    //     allItems: newList,
+    //     currentList: newListCurrent
+    //   }
+    //   return newState;
+    // }
 
     default:
       return state;
@@ -90,8 +97,7 @@ const reducer = (state, action) => {
 
 const data1 = [...data].map((e, id) => {e.id = id; return e});
 const store = createStore(reducer, {
-  allItems: [...data1],
-  currentList: [...data1]
+  allItems: [...data1]
 });
 
 

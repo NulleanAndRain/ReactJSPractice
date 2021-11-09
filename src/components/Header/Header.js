@@ -19,7 +19,9 @@ function Header (props) {
             next = '/';
         }
 
-        if (next === location.pathname) return;
+        if (next === location.pathname) {
+            return;
+        }
 
         history.push(next);
         history.goForward();
