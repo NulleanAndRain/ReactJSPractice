@@ -18,9 +18,15 @@ const Edit = (props) => {
     const priceInput = useRef();
 
     useEffect(() => {
-        nameInput.current.value = props.item.name;
-        countInput.current.value = props.item.count;
-        priceInput.current.value = props.item.price;
+        if (!!props.item){
+            nameInput.current.value = props.item.name;
+            countInput.current.value = props.item.count;
+            priceInput.current.value = props.item.price;
+        } else {
+            nameInput.current.value  = 'item';
+            countInput.current.value = 1;
+            priceInput.current.value = 10;
+        }
     }, [props]);
 
     return (<div>

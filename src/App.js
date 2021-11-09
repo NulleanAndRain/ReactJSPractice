@@ -42,13 +42,10 @@ const reducer = (state, action) => {
       let newList = [...state.allItems];
       newList.splice(newList.indexOf(action.value), 1);
 
-      console.log('new list: ', newList);
-
       let newState = {
         ...state,
         allItems: newList,
       }
-      console.log('state: ', newState);
       return newState;
     }
 
@@ -59,6 +56,16 @@ const reducer = (state, action) => {
 
       console.log(index);
 
+      let newState = {
+        ...state,
+        allItems: newList,
+      }
+      return newState;
+    }
+
+    case 'add_item':{
+      action.newItem.id = state.allItems.length;
+      const newList = [...state.allItems, action.newItem];
       let newState = {
         ...state,
         allItems: newList,
