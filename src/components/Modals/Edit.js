@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import './Modals.css';
 
-const Eidt = (props) => {
+const Edit = (props) => {
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
@@ -18,21 +18,25 @@ const Eidt = (props) => {
     }, [props]);
 
     return (<div>
-        <form action={onSubmit} >
-            <label>
+        <form onSubmit = {onSubmit} >
+            <label className='EditModal_inputRow'>
                 Item name <br/>
                 <input type='text' ref={nameInput}/>
-            </label><br/>
-            <label>
+            </label>
+            <label className='EditModal_inputRow'>
                 Count <br/>
                 <input type='number' ref={countInput}/>
-            </label><br/>
-            <label>
+            </label>
+            <label className='EditModal_inputRow'>
                 Price <br/>
                 <input type='number' ref={priceInput} />
-            </label><br/>
+            </label>
+            <div className='modal_buttons'>
+                <input type='button' onClick={props.onCancel} value='Cancel'/>
+                <input type='submit' value='Submit'/>
+            </div>
         </form>
     </div>);
 }
 
-export { Eidt }
+export { Edit }

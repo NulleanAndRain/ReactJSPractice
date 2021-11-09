@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { ModalsContext } from '../../App';
 import { RemoveConfirm } from '../Modals/RemoveConfirm';
+import { Edit } from '../Modals/Edit';
 
 const ItemActions = (props) => {
 
@@ -13,7 +14,7 @@ const ItemActions = (props) => {
         modalsContext.closeModals();
     }, [props, dispatch, modalsContext]);
 
-    const cancelDelete = useCallback(() => {
+    const cancel = useCallback(() => {
         modalsContext.closeModals();
     }, [modalsContext])
 
@@ -21,17 +22,27 @@ const ItemActions = (props) => {
         const modal = (
         <RemoveConfirm 
             onSubmit = {submitDelete}
-            onCancel = {cancelDelete}
+            onCancel = {cancel}
             itemName={props.item.name}
             key = {modalsContext.modals.length}
         />);
         modalsContext.setModals(state => [...state, modal]);
         modalsContext.setVisible(true);
-    }, [modalsContext, submitDelete, cancelDelete, props])
+    }, [modalsContext, submitDelete, cancel, props]);
+
+    const edit = useCallback(() => {
+        const modal = (
+        <Edit 
+            item={props.item}
+            onCancel = {cancel}
+        />);
+        modalsContext.setModals(state => [...state, modal]);
+        modalsContext.setVisible(true);
+    }, [props, cancel, modalsContext]);
 
     return (
     <>
-        <button className={'ActionButton'}>Edit</button>
+        <button className={'ActionButton'} onClick = {edit}>Edit</button>
         <button className={'ActionButton'} onClick = {remove}>Remove</button>
     </>);
 };

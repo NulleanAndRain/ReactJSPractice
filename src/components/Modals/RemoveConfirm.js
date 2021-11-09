@@ -7,7 +7,7 @@ const RemoveConfirm = (props) =>{
             Are you sure you want to delete &#160;
             <span className='DeleteModal_itemName'>{props.itemName}</span>? 
         </p>
-        <div className='DeleteModal_buttons'>
+        <div className='modal_buttons'>
             <button onClick = {props.onCancel}>Cancel</button>
             <button onClick = {props.onSubmit}>Submit</button>
         </div>

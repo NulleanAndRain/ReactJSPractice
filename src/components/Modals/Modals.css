@@ -31,7 +31,7 @@
     justify-content: space-evenly;
 }
 
-.DeleteModal_buttons{
+.modal_buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -41,4 +41,16 @@
 .DeleteModal_itemName{
     text-decoration: underline;
     color: rgb(69, 60, 92);
+}
+
+.EditModal{
+    width: 200px;
+    height: auto;
+}
+
+.EditModal_inputRow{
+    display: block;
+    padding-bottom: 1em;
+    width: 100%;
+    text-align: left;
 }
