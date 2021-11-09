@@ -54,8 +54,6 @@ const reducer = (state, action) => {
       const index = newList.indexOf(action.oldItem);
       newList[index] = action.newItem;
 
-      console.log(index);
-
       let newState = {
         ...state,
         allItems: newList,
@@ -66,6 +64,7 @@ const reducer = (state, action) => {
     case 'add_item':{
       action.newItem.id = state.allItems.length;
       const newList = [...state.allItems, action.newItem];
+
       let newState = {
         ...state,
         allItems: newList,
@@ -83,12 +82,9 @@ const store = createStore(reducer, {
   allItems: [...data1]
 });
 
-
 function App() {
-
   const history = createBrowserHistory();
   const [visible, setVisible] = useState(false);
-
   const [modals, setModals] = useState([]);
 
   const closeModals = useCallback(() => {
@@ -99,7 +95,6 @@ function App() {
       setModals([]);
     }
   }, [modals, setModals, setVisible]);
-
 
   return (
     <Provider store = {store} >
