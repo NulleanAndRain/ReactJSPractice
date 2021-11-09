@@ -26,5 +26,19 @@
 .DeleteModal{
     width: 200px;
     height: 150px;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.DeleteModal_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.DeleteModal_itemName{
+    text-decoration: underline;
+    color: rgb(69, 60, 92);
 }
