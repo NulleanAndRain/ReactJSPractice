@@ -54,3 +54,11 @@
     width: 100%;
     text-align: left;
 }
+
+.IncorrectInput {
+    border: 1px solid rgb(216, 42, 42);
+}
+
+.PriceInput:not(:focus)::after{
+    content: '$';
+}
