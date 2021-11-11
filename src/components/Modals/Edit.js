@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './Modals.css';
 
-// const validateName = (name) => {
-//     const len = name.trim().length;
-//     const maxLen = 15;
-//     return len !== 0 && len <= maxLen;
-// }
+const validateName = (name) => {
+    const len = name.trim().length;
+    const maxLen = 15;
+    return len !== 0 && len <= maxLen;
+}
 
-// const validateEmail = (email) => {
-//     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return re.test(email.toLowerCase());
-// }
+const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+}
 
 const Edit = (props) => {
     const nameInput = useRef();
@@ -20,20 +20,10 @@ const Edit = (props) => {
 
     let [price, setPrice] = useState(0);
 
-    const onSubmit = useCallback((e) => {
-        e.preventDefault();
-        const item = {
-            name: nameInput.current.value,
-            count: countInput.current.value,
-            price
-        }
-        props.onSubmit(item);
-    }, [props, price]);
 
     const onFocusPrice = useCallback(() => {
         priceInput.current.type = 'number';
         priceInput.current.value = price;
-        console.log('focus');
     }, [priceInput, price]);
 
     const setPriceInput = useCallback((val) => {
@@ -57,6 +47,38 @@ const Edit = (props) => {
     }, [priceInput, setPriceInput]);
 
 
+    const CheckName = useCallback(() => {
+        const isValid = validateName(nameInput.current.value);
+        if (!isValid){
+            nameInput.current.classList.add('IncorrectInput');
+        } else {
+            nameInput.current.classList.remove('IncorrectInput');
+        }
+        return isValid;
+    }, [nameInput]);
+
+
+    const CheckEmail = useCallback(() => {
+        const isValid = validateEmail(emailInput.current.value);
+        if (!isValid){
+            emailInput.current.classList.add('IncorrectInput');
+        } else {
+            emailInput.current.classList.remove('IncorrectInput');
+        }
+        return isValid;
+    }, [emailInput]);
+
+    const onSubmit = useCallback((e) => {
+        e.preventDefault();
+        const item = {
+            name: nameInput.current.value,
+            count: countInput.current.value,
+            price
+        }
+        if (CheckName() && CheckEmail()){
+            props.onSubmit(item);
+        }
+    }, [props, price, CheckName, CheckEmail]);
 
     useEffect(() => {
         if (!!props.item){
@@ -77,11 +99,20 @@ const Edit = (props) => {
         <form onSubmit = {onSubmit} >
             <label className='EditModal_inputRow'>
                 Item name <br/>
-                <input type='text' ref={nameInput}/>
+                <input 
+                    type='text'
+                    ref={nameInput}
+                    onBlur={CheckName}
+                />
             </label>
             <label className='EditModal_inputRow'>
                 Email <br/>
-                <input type='email' ref={emailInput} placeholder='email@example.com'/>
+                <input 
+                    type='email'
+                    ref={emailInput}
+                    placeholder='email@example.com'
+                    onBlur={CheckEmail}
+                />
             </label>
             <label className='EditModal_inputRow'>
                 Count <br/>
