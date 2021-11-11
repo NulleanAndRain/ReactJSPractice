@@ -21,14 +21,6 @@ export const ModalsContext = createContext({
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'restore_filter': {
-      let newState = {
-        ...state,
-        currentList: state.allItems
-      }
-      return newState;
-    }
-
     case 'order_by': {
       let newState = {
         ...state,

@@ -20,9 +20,9 @@ const ModalRoot =  (props) => {
                 className = 'ModalWrapper' 
                 onClick = {e => e.stopPropagation()}
             >
-                {!!modalsContext.modals? 
-                    modalsContext.modals[modalsContext.modals.length - 1] :
-                    null}
+                {!!modalsContext.modals &&
+                    modalsContext.modals[modalsContext.modals.length - 1] 
+                }
             </div>
         </div>
     }</>,

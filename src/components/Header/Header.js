@@ -27,13 +27,15 @@ function Header (props) {
 
         if (str.length > 0) {
             next = `/search/${str}`;
+            dispatch({ type: '' });
         } else {
             next = '/';
+            dispatch({ type: '' });
         }
 
         history.push(next);
         history.goForward();
-    }, [history]);
+    }, [history, dispatch]);
 
     const cancel = useCallback(() => {
         modalsContext.closeModals();
