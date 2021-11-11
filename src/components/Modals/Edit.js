@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './Modals.css';
 
-const validateName = (name) => {
-    const len = name.trim().length;
-    const maxLen = 15;
-    return len !== 0 && len <= maxLen;
-}
+// const validateName = (name) => {
+//     const len = name.trim().length;
+//     const maxLen = 15;
+//     return len !== 0 && len <= maxLen;
+// }
 
-const validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email.toLowerCase());
-}
+// const validateEmail = (email) => {
+//     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(email.toLowerCase());
+// }
 
 const Edit = (props) => {
     const nameInput = useRef();
@@ -30,33 +30,48 @@ const Edit = (props) => {
         props.onSubmit(item);
     }, [props, price]);
 
+    const onFocusPrice = useCallback(() => {
+        priceInput.current.type = 'number';
+        priceInput.current.value = price;
+        console.log('focus');
+    }, [priceInput, price]);
+
+    const setPriceInput = useCallback((val) => {
+        if (priceInput.current.type === 'text') {
+            const _pStr = val.toLocaleString('en-US', { 
+                style: 'currency',
+                currency: 'USD',
+                currencyDisplay: 'symbol',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+            priceInput.current.value = _pStr;
+        }
+    }, [priceInput]);
+
+    const onBlurPrice = useCallback(() => {
+        const _p = parseFloat(priceInput.current.value);
+        setPrice(_p);
+        priceInput.current.type = 'text';
+        setPriceInput(_p);
+    }, [priceInput, setPriceInput]);
+
+
+
     useEffect(() => {
         if (!!props.item){
             nameInput.current.value = props.item.name;
             countInput.current.value = props.item.count;
-            priceInput.current.value = '$' + props.item.price;
             setPrice(props.item.price);
+            setPriceInput(props.item.price);
         } else {
+            const _p = 10;
             nameInput.current.value  = 'item';
             countInput.current.value = 1;
-            priceInput.current.value = 10;
-            setPrice(10);
+            setPrice(_p);
+            setPriceInput(_p);
         }
-    }, [props]);
-
-
-    const onFocusPrice = useCallback(() => {
-        const numStr = priceInput.current.value.replace("$", '');
-        const num = parseFloat(numStr);
-        priceInput.current.type = 'number';
-        priceInput.current.value = num;
-    }, [priceInput]);
-
-    const onBlurPrice = useCallback(() => {
-        setPrice(parseFloat(priceInput.current.value));
-        priceInput.current.type = 'text';
-        priceInput.current.value = `$${price}`;
-    }, [priceInput, setPrice, price])
+    }, [props, setPriceInput]);
 
     return (<div>
         <form onSubmit = {onSubmit} >
